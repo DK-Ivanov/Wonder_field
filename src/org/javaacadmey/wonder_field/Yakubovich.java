@@ -30,5 +30,22 @@ public class Yakubovich {
         }
     }
 
+    public static void checkPlayerAnswer(String playerAnswer, String answer, String tableau) {
+        if(answer.length() == 1) {
+            if(answer.contains(playerAnswer)) {
+                System.out.println("Якубович: Есть такая буква, откройте ее!");
+            } else {
+                System.out.println("Якубович: Нет такой буквы! Следующий игрок, крутите барабан!");
+                System.out.println("__________________________________");
+            }
+        } else if (answer.length() > 1) {
+            if(answer.equals(playerAnswer)) {
+                System.out.println("Якубович: " +playerAnswer +"!" +"Абсолютно верно!");
+            } else {
+                System.out.println("Якубович: Неверно! Следующий игрок!");
+                System.out.println("__________________________________");
+            }
+        }
 
+    }
 }
