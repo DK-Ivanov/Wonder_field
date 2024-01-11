@@ -1,8 +1,14 @@
 package org.javaacadmey.wonder_field;
 
 public class Tableau {
-    private String answer;
+    private String answer = new String();
     private char[] wordOnTableau;
+
+    public String getAnswer() {
+        return answer;
+    }
+
+
 
     public void tableauInit(String answer) {
         this.answer = answer.toUpperCase();
@@ -13,20 +19,21 @@ public class Tableau {
     }
 
     public void openLetter(char letter) {
-        if (!attributesAreEmpty()) {
-            int[] letterIndexes = Tools.getIndexes(this.answer, Character.toUpperCase(letter));
-            for (int i : letterIndexes) {
-                wordOnTableau[i] = Character.toUpperCase(letter);
-            }
-            for (int i = 0; i < this.answer.length(); i++) {
-                System.out.print(wordOnTableau[i]);
-            }
-            System.out.println("\n");
+        int[] letterIndexes = Tools.getIndexes(this.answer, Character.toUpperCase(letter));
+        for (int i : letterIndexes) {
+            wordOnTableau[i] = Character.toUpperCase(letter);
         }
+        for (int i = 0; i < this.answer.length(); i++) {
+            System.out.print(wordOnTableau[i]);
+        }
+        System.out.println("");
     }
 
     public void openWord() {
-        System.out.println(answer);
+        System.out.print(answer);
+        for (int i = 0; i < answer.length(); i++) {
+            wordOnTableau[i] = answer.charAt(i);
+        }
     }
 
     public boolean containsUnknownLetters() {

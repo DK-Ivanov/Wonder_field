@@ -1,5 +1,6 @@
 package org.javaacadmey.wonder_field;
 
+import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Tools {
@@ -24,7 +25,7 @@ public class Tools {
     }
 
     public static String checkLetter() {
-        String letter = Game.scan.nextLine().toUpperCase();
+        String letter = new Scanner(System.in).nextLine().toUpperCase();
         if (!Pattern.matches(".*\\p{InCyrillic}.*", letter)) {
             System.out.println("Ошибка! Это не русская буква, введите русскую букву");
             letter = checkLetter();
@@ -36,7 +37,7 @@ public class Tools {
     }
 
     public static String checkTypeOfAnswer() {
-        String typeOfAnswer = Game.scan.nextLine();
+        String typeOfAnswer = new Scanner(System.in).nextLine();
         if (!Pattern.matches("[бс]", typeOfAnswer) || typeOfAnswer.length() > 1 || typeOfAnswer.length() < 1) {
             System.out.println("Некорректное значение, введите 'б' или 'с'");
             typeOfAnswer = checkTypeOfAnswer();

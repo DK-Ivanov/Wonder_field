@@ -11,9 +11,8 @@ public class Yakubovich {
 
     public void invitePlayers(String[] players, int roundNumber) {
         if (roundNumber < 4) {
-            System.out.print("Якубович: приглашаю" + roundNumber + "тройку игроков: " + Tools.combiningLines(players));
-        }
-        if (roundNumber == 4) {
+            System.out.println("Якубович: приглашаю " + roundNumber + " тройку игроков: " + Tools.combiningLines(players));
+        } else if (roundNumber == 4) {
             System.out.println("Якубович: приглашаю победителей групповых этапов: " + Tools.combiningLines(players));
         }
     }
@@ -22,30 +21,40 @@ public class Yakubovich {
         System.out.println("Якубович: Внимание вопрос!\n" + question);
     }
 
-    public static void winShout(String name, String city, boolean finalRound) {
-        if (!finalRound) {
-            System.out.println("Якубович: Молодец! " + name + " из " + city + " проходит в финал!");
+    public void winShout(String name, String city, int roundNumber) {
+        if (roundNumber <= 3) {
+            System.out.println("Якубович: Молодец! " + name + " из города " + city + " проходит в финал!\n");
         } else {
-            System.out.println("Якубович: И перед нами победитель Капитал шоу поле чудес! Это" + name + " из " + city);
+            System.out.println("Якубович: И перед нами победитель Капитал шоу поле чудес! Это " + name + " из города " + city);
         }
     }
 
-    public static void checkPlayerAnswer(String playerAnswer, String answer, String tableau) {
-        if(answer.length() == 1) {
-            if(answer.contains(playerAnswer)) {
+    public boolean checkPlayerAnswer(String playerAnswer, String answer, Tableau tableau) {
+        boolean wrong = false;
+        if (playerAnswer.length() == 1) {
+            if (answer.contains(playerAnswer)) {
                 System.out.println("Якубович: Есть такая буква, откройте ее!");
+                System.out.println("__________________________________");
+                tableau.openLetter(playerAnswer.charAt(0));
+                System.out.println("__________________________________");
             } else {
                 System.out.println("Якубович: Нет такой буквы! Следующий игрок, крутите барабан!");
-                System.out.println("__________________________________");
+                System.out.println("__________________________________\n");
+                wrong = true;
             }
-        } else if (answer.length() > 1) {
-            if(answer.equals(playerAnswer)) {
-                System.out.println("Якубович: " +playerAnswer +"!" +"Абсолютно верно!");
+        } else if (playerAnswer.length() > 1) {
+            if (answer.equals(playerAnswer)) {
+                System.out.println("Якубович: " + playerAnswer + "!" + " Абсолютно верно!");
+                System.out.println("__________________________________");
+                tableau.openWord();
+                System.out.println("\n__________________________________");
             } else {
                 System.out.println("Якубович: Неверно! Следующий игрок!");
-                System.out.println("__________________________________");
+                System.out.println("__________________________________\n");
+                wrong = true;
             }
         }
-
+        return wrong;
     }
+
 }
